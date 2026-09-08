@@ -169,12 +169,13 @@ create table if not exists public.partners (
   updated_at   timestamptz not null default now()
 );
 
--- Social proof (exact fields UNKNOWN — flexible shape; ~4 records in prod)
+-- Social proof: "win highlights" with a title + category tag
+-- (e.g. "Nofisat's team won a prize at the Celo MiniPay Hack" / "Hackathon Win").
 create table if not exists public.social_proof (
   id           uuid primary key default gen_random_uuid(),
-  title        text,
+  title        text not null,      -- the highlight statement
+  category     text,               -- Hackathon Win | Worktool Grant | Workshop Impact | ...
   description  text,
-  value        text,
   source_url   text,
   image_url    text,
   position     integer not null default 0,
@@ -183,11 +184,13 @@ create table if not exists public.social_proof (
   updated_at   timestamptz not null default now()
 );
 
--- Impact statistics (e.g. "20,000+" / "women reached"; ~12 records in prod)
+-- Impact statistics: a number + label + a supporting description paragraph
+-- (e.g. "20,000+" / "women reached" / "We've shown up in the feeds...").
 create table if not exists public.impact_stats (
   id           uuid primary key default gen_random_uuid(),
   value        text not null,      -- "20,000+"
   label        text not null,      -- "women reached"
+  description  text,               -- supporting paragraph
   position     integer not null default 0,
   is_published boolean not null default true,
   created_at   timestamptz not null default now(),

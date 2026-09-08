@@ -76,9 +76,9 @@ export type Partner = {
 
 export type SocialProof = {
   id: string;
-  title: string | null;
+  title: string;
+  category: string | null;
   description: string | null;
-  value: string | null;
   source_url: string | null;
   image_url: string | null;
   position: number;
@@ -89,6 +89,7 @@ export type ImpactStat = {
   id: string;
   value: string;
   label: string;
+  description: string | null;
   position: number;
   is_published: boolean;
 };

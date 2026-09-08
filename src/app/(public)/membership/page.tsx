@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
+import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/public/section-heading";
 import { DynamicForm } from "@/components/public/dynamic-form";
 import { getFormConfig } from "@/lib/queries";
@@ -30,7 +31,8 @@ export default async function MembershipPage() {
     <>
       <Section className="pt-16 sm:pt-24">
         <Container className="max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Web3Ladies Circle</h1>
+          <Badge variant="muted" className="mx-auto">Coming Soon — Founding Members First</Badge>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">Web3Ladies Circle</h1>
           <p className="mt-6 text-lg text-muted-foreground">
             A curated membership for women serious about building with more
             clarity, stronger support, and better access.

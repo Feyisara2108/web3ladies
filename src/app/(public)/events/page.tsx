@@ -8,17 +8,24 @@ import type { EventItem } from "@/lib/types";
 
 export const metadata = { title: "Events — Web3Ladies" };
 
+// Verbatim from the live site — see docs/live-content-reference.md
 const PILLARS = [
-  { t: "Web3 x AI Direction & Ecosystem", d: "Onchain products, payments, smart contracts, protocol infrastructure." },
-  { t: "Income & Financial Readiness", d: "Money fundamentals, investing, negotiation, scam awareness." },
-  { t: "Brand & Visibility", d: "Public positioning, thought leadership, speaker development." },
-  { t: "Community & Storytelling", d: "Founder discussions and intimate networking formats." },
-  { t: "Career Movement & Work Readiness", d: "Job search, portfolio building, professional development." },
+  { t: "Web3 x AI Direction & Ecosystem", d: "Onchain products, payments, stablecoins, smart contracts, protocol infrastructure, AI integrations, and where the industry is headed." },
+  { t: "Income & Financial Readiness", d: "Money Moves 101, investing basics, negotiation, earning models, scam awareness, and work readiness." },
+  { t: "Brand & Visibility", d: "Brand OS, writing rooms, speaker track, thought leadership, and public profile positioning." },
+  { t: "Community & Storytelling", d: "Audacity to Thrive." },
+  { t: "Career Movement & Work Readiness", d: "Job search, portfolio building, Web3 career mapping, and professional confidence." },
 ];
 
 const FORMATS = [
   "Technical workshops", "Founder AMAs", "Panel conversations", "Career talks",
-  "Community meetups", "Demo sessions", "Masterclass", "Special focus events",
+  "Community meetups", "Demo sessions", "Special focus events",
+];
+
+const HOST_BENEFITS = [
+  "Co-branded promotion across Web3Ladies channels",
+  "Experienced event support and moderation",
+  "Post-event visibility and content distribution",
 ];
 
 function formatDate(date: string | null) {
@@ -127,9 +134,14 @@ export default async function EventsPage() {
         <Container className="max-w-2xl">
           <SectionHeading
             title="Host with us"
-            description="Reach 20,000+ women with co-branded promotion, event support, and post-event content distribution."
+            description="Reach a growing community of women building in emerging technology."
           />
-          <div className="mt-10 rounded-2xl border border-border bg-card p-6 sm:p-8">
+          <ul className="mx-auto mt-8 flex max-w-md flex-col gap-2">
+            {HOST_BENEFITS.map((b) => (
+              <li key={b} className="text-sm text-muted-foreground">• {b}</li>
+            ))}
+          </ul>
+          <div className="mt-8 rounded-2xl border border-border bg-card p-6 sm:p-8">
             <DynamicForm config={config} formKey="event_host_request" fallbackTitle="Event Host Request" />
           </div>
         </Container>

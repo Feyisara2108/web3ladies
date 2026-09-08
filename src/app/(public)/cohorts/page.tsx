@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,7 +35,8 @@ export default async function CohortsPage() {
     <>
       <Section className="pt-16 sm:pt-24">
         <Container className="max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <Badge variant="muted" className="mx-auto">Coming Back Soon</Badge>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
             Cohorts built for where Web3 is headed
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">

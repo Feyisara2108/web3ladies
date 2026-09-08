@@ -6,9 +6,6 @@ import {
   Users,
   ArrowRight,
   Sparkles,
-  Target,
-  Layers,
-  Eye,
 } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,53 +29,54 @@ import {
 // is site chrome, not CMS-managed. CMS content (featured, impact, partners,
 // testimonials, founder story) is loaded from the database.
 
+// Verbatim copy from the live site — see docs/live-content-reference.md
 const OFFERINGS = [
   {
     icon: Rocket,
     title: "Web3 x AI Venture Builder",
-    body: "Hands-on experience for women building careers, products, and ventures at the intersection of blockchain and AI.",
+    body: "A hands-on experience for women building future-facing careers, products, and ventures at the intersection of blockchain, AI, and the future of work.",
     href: "/venture-builder",
   },
   {
     icon: Wrench,
     title: "Worktool Grants",
-    body: "Sponsor-backed support including laptops, internet, and software access for selected women builders.",
+    body: "Sponsor-backed work tool support for selected women builders — laptops, internet, software access, and essential resources to keep building.",
     href: "/partner",
   },
   {
     icon: CalendarDays,
     title: "Events",
-    body: "Workshops, AMAs, masterclasses, and meetups connecting women to ideas, builders, and opportunities.",
+    body: "Workshops, AMAs, masterclasses, meetups, and conversations that connect women to real ideas, real builders, and real opportunities.",
     href: "/events",
   },
   {
     icon: Users,
     title: "Community",
-    body: "A support system for ambitious women navigating learning, visibility, and growth in emerging technology.",
+    body: "A support system for ambitious women navigating learning, transition, visibility, accountability, and growth in emerging technology.",
     href: "/community",
   },
 ];
 
 const PATHS = [
-  { title: "Join the Community", body: "Free access to a global network of women building in Web3 and AI.", cta: "Join Community", href: "/community" },
-  { title: "Apply to Venture Builder", body: "Our flagship, application-based paid program for serious builders.", cta: "Apply Now", href: "/venture-builder" },
-  { title: "Sponsor a Seat", body: "Fund scholarship seats for women who need support to participate.", cta: "Partner With Us", href: "/partner" },
-  { title: "Host an Event", body: "Partner with us to run workshops, AMAs, and community meetups.", cta: "Host With Us", href: "/events" },
+  { title: "Join the Community", body: "Free access to our global network of women learning and building in emerging technology.", cta: "Join Free", href: "/community" },
+  { title: "Apply to Venture Builder", body: "Our flagship paid program — build your MVP, grow your skills, and demo what you create.", cta: "Apply Now", href: "/venture-builder" },
+  { title: "Sponsor a Seat", body: "Fund a scholarship seat and help widen access for women building in emerging tech.", cta: "Partner With Us", href: "/partner" },
+  { title: "Host With Us", body: "Partner with us to host a workshop, AMA, meetup, or community conversation for women in tech.", cta: "Host With Us", href: "/events" },
 ];
 
 const AUDIENCES = [
-  "Women exploring blockchain, AI, and emerging tech careers",
-  "Early-career builders seeking structure and direction",
-  "Technical professionals specializing deeper",
-  "Founders and aspiring founders",
-  "Career professionals transitioning from finance, law, healthcare, education, and more",
+  "Women exploring careers in blockchain, AI, and emerging technology",
+  "Early-career builders looking for structure, community, and direction",
+  "Technical professionals growing into deeper specialization",
+  "Founders and aspiring founders building future-facing products",
+  "Women who already have a career in finance, law, healthcare, education, or anywhere else, and are ready to bring blockchain or AI into what they already know how to do",
 ];
 
 const DIFFERENTIATORS = [
-  { icon: Sparkles, title: "Future-focused", body: "Preparation for emerging work and opportunities, not yesterday's playbook." },
-  { icon: Target, title: "Practical outcomes", body: "An emphasis on real results over motivation alone." },
-  { icon: Layers, title: "Integrated support", body: "Skills, mentorship, exposure, and community woven together." },
-  { icon: Eye, title: "Built for visibility", body: "A space for women to learn, build, lead, and be seen." },
+  "We are future-focused — always preparing women for the future of work, opportunity, and impact",
+  "We care about practical outcomes, not just motivational language",
+  "We combine skills, mentorship, exposure, and community support",
+  "We are building a space where women can learn, build, lead, and be seen",
 ];
 
 export default async function HomePage() {
@@ -233,13 +231,12 @@ export default async function HomePage() {
           <SectionHeading eyebrow="What makes us different" title="Why Web3Ladies works" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {DIFFERENTIATORS.map((d) => (
-              <Card key={d.title} className="h-full">
+              <Card key={d} className="h-full">
                 <CardContent className="flex h-full flex-col gap-3 p-6">
                   <span className="inline-flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <d.icon className="size-5" />
+                    <Sparkles className="size-5" />
                   </span>
-                  <h3 className="font-display text-lg font-semibold">{d.title}</h3>
-                  <p className="text-sm text-muted-foreground">{d.body}</p>
+                  <p className="text-sm text-foreground">{d}</p>
                 </CardContent>
               </Card>
             ))}
