@@ -1,20 +1,23 @@
+import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { SectionHeading } from "@/components/public/section-heading";
 import { Testimonials } from "@/components/public/testimonials";
 import { DynamicForm } from "@/components/public/dynamic-form";
+import { CTASection } from "@/components/public/cta-section";
 import { getFormConfig, getTestimonialsByPlacement } from "@/lib/queries";
 
 export const metadata = { title: "Community — Web3Ladies" };
 
-const FEATURES = [
+// Verbatim from the live site — see docs/live-content-reference.md
+const INSIDE = [
   "Real conversations",
   "Encouragement without gatekeeping",
   "Opportunities and ecosystem updates",
   "Peer accountability",
   "Mentorship moments",
-  "A network of women building publicly",
+  "A network of women building in public and growing on purpose",
 ];
 
 const VALUES = [
@@ -30,27 +33,44 @@ export default async function CommunityPage() {
 
   return (
     <>
+      {/* Hero */}
       <Section className="pt-16 sm:pt-24">
         <Container className="max-w-3xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
             A community for women building with courage, clarity, and support
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">
-            Web3Ladies is a community for women learning, building,
-            transitioning, and leading in Web3, AI, and emerging technologies.
+            Web3Ladies is a home for women learning, building, transitioning, and
+            leading across Web3, AI, and adjacent emerging technologies.
+          </p>
+          <div className="mt-8">
+            <Link href="#join" className={buttonVariants({ size: "lg" })}>
+              Join Community
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Why community matters */}
+      <Section className="py-14">
+        <Container className="max-w-3xl text-center">
+          <SectionHeading title="Why community matters" />
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Too many women try to navigate emerging technology in isolation —
+            learning quietly, doubting themselves, second-guessing their next
+            step, and feeling like everyone else knows more. Web3Ladies exists to
+            change that. This is a space for support, accountability, access, and
+            becoming.
           </p>
         </Container>
       </Section>
 
-      <Section className="py-14">
+      {/* Inside the community */}
+      <Section className="bg-warm py-14">
         <Container>
-          <SectionHeading
-            eyebrow="Why community matters"
-            title="A space for support, accountability, access, and becoming"
-            description="Building in tech can be isolating. Here, you're not doing it alone."
-          />
+          <SectionHeading title="Inside the community" />
           <ul className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
-            {FEATURES.map((f) => (
+            {INSIDE.map((f) => (
               <li key={f} className="rounded-lg border border-border bg-card p-4 text-sm">
                 {f}
               </li>
@@ -59,9 +79,10 @@ export default async function CommunityPage() {
         </Container>
       </Section>
 
-      <Section className="bg-warm py-14">
+      {/* Our values */}
+      <Section className="py-14">
         <Container>
-          <SectionHeading eyebrow="Our values" title="What we stand for" />
+          <SectionHeading title="Our values" />
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {VALUES.map((v) => (
               <Badge key={v} variant="secondary" className="text-sm">{v}</Badge>
@@ -70,18 +91,8 @@ export default async function CommunityPage() {
         </Container>
       </Section>
 
-      {testimonials.length > 0 && (
-        <Section className="py-14">
-          <Container>
-            <SectionHeading title="From our community" />
-            <div className="mt-10">
-              <Testimonials items={testimonials} />
-            </div>
-          </Container>
-        </Section>
-      )}
-
-      <Section className="bg-warm py-16">
+      {/* Join form */}
+      <Section id="join" className="bg-warm py-16">
         <Container className="max-w-2xl">
           <SectionHeading
             title="Join the community"
@@ -92,6 +103,25 @@ export default async function CommunityPage() {
           </div>
         </Container>
       </Section>
+
+      {/* Testimonials */}
+      {testimonials.length > 0 && (
+        <Section className="py-14">
+          <Container>
+            <SectionHeading title="What our community members say" />
+            <div className="mt-10">
+              <Testimonials items={testimonials} />
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* Closing CTA */}
+      <CTASection
+        title="You do not have to figure it all out alone"
+        description="Join a community built to help women keep learning, keep building, and keep becoming."
+        primary={{ label: "Join Community", href: "#join" }}
+      />
     </>
   );
 }
