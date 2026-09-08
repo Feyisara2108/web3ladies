@@ -14,18 +14,21 @@ import {
 
 export const metadata = { title: "Partner — Web3Ladies" };
 
+// Package names/prices and "ways to work with us" are verbatim from the live
+// site. Body copy for the narrative sub-sections is approximate — see
+// docs/live-content-reference.md (marked UNKNOWN where not fully observable).
 const PACKAGES = [
   { tier: "Scholarship Partner", price: "$2,500", note: "Funds scholarship seats" },
   { tier: "Work Tool Partner", price: "$3,000", note: "Laptops, internet, software" },
   { tier: "Event Series Sponsor", price: "$5,000–$10,000", note: "Themed workshops and meetups" },
   { tier: "Cohort / Track Sponsor", price: "$7,500", note: "Focused learning track support" },
   { tier: "Annual Ecosystem Partner", price: "$15,000–$30,000", note: "Ongoing support and visibility" },
-  { tier: "Custom Partnership", price: "Contact", note: "Tailored arrangements" },
+  { tier: "Custom Partnership", price: "Let's Talk", note: "Tailored arrangements" },
 ];
 
 const WAYS = [
   "Program sponsorship", "Event sponsorship", "Tool sponsorship", "Mentorship collaboration",
-  "Ecosystem partnerships", "Speaker partnerships", "Community activations", "Talent initiatives",
+  "Ecosystem partnerships", "Speaker partnerships", "Community activations", "Talent and visibility initiatives",
 ];
 
 export default async function PartnerPage() {
@@ -38,6 +41,7 @@ export default async function PartnerPage() {
 
   return (
     <>
+      {/* Hero */}
       <Section className="pt-16 sm:pt-24">
         <Container className="max-w-3xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -45,14 +49,37 @@ export default async function PartnerPage() {
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">
             Support the next generation of women building across Web3, AI, and
-            emerging technology. Fund specific outcomes: scholarship seats, work
-            tool support, event access, and visible pathways.
+            emerging technology.
           </p>
         </Container>
       </Section>
 
+      {/* Why partner with us */}
+      <Section className="py-14">
+        <Container className="max-w-3xl text-center">
+          <SectionHeading title="Why partner with us" />
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Partner with Web3Ladies to fund specific outcomes: scholarship seats,
+            work tool support, event access, and visible pathways for women
+            building in Web3 and emerging technology.
+          </p>
+        </Container>
+      </Section>
+
+      {/* Sponsor outcomes, not just activity */}
+      <Section className="bg-warm py-14">
+        <Container className="max-w-3xl text-center">
+          <SectionHeading title="Sponsor outcomes, not just activity" />
+          <p className="mt-6 text-muted-foreground">
+            Every partnership maps to a concrete result — women trained, tools
+            delivered, events run, and opportunities opened.
+          </p>
+        </Container>
+      </Section>
+
+      {/* Proof of impact */}
       {impact.length > 0 && (
-        <Section className="bg-warm py-14">
+        <Section className="py-14">
           <Container>
             <SectionHeading title="Proof of impact" />
             <div className="mt-10">
@@ -62,8 +89,33 @@ export default async function PartnerPage() {
         </Section>
       )}
 
-      {partners.length > 0 && (
+      {/* What partnerships look like in practice */}
+      <Section className="bg-warm py-14">
+        <Container className="max-w-3xl text-center">
+          <SectionHeading title="What partnerships look like in practice" />
+          <p className="mt-6 text-muted-foreground">
+            From scholarship and work tool support to themed event series,
+            cohort tracks, and annual ecosystem partnerships — we shape the
+            engagement around the outcomes you care about.
+          </p>
+        </Container>
+      </Section>
+
+      {/* What our community says */}
+      {testimonials.length > 0 && (
         <Section className="py-14">
+          <Container>
+            <SectionHeading title="What our community says" />
+            <div className="mt-10">
+              <Testimonials items={testimonials} />
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* Organizations we've worked with */}
+      {partners.length > 0 && (
+        <Section className="bg-warm py-14">
           <Container>
             <SectionHeading title="Organizations we've worked with" />
             <div className="mt-10">
@@ -73,9 +125,10 @@ export default async function PartnerPage() {
         </Section>
       )}
 
-      <Section className="bg-warm py-14">
+      {/* Sponsorship packages */}
+      <Section className="py-14">
         <Container>
-          <SectionHeading title="Sponsorship packages" description="Sponsor outcomes, not just activity." />
+          <SectionHeading title="Sponsorship packages" />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PACKAGES.map((p) => (
               <Card key={p.tier} className="h-full">
@@ -90,7 +143,8 @@ export default async function PartnerPage() {
         </Container>
       </Section>
 
-      <Section className="py-14">
+      {/* Ways to work with us */}
+      <Section className="bg-warm py-14">
         <Container>
           <SectionHeading title="Ways to work with us" />
           <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-3">
@@ -101,18 +155,20 @@ export default async function PartnerPage() {
         </Container>
       </Section>
 
-      {testimonials.length > 0 && (
-        <Section className="bg-warm py-14">
-          <Container>
-            <SectionHeading title="What our community says" />
-            <div className="mt-10">
-              <Testimonials items={testimonials} />
-            </div>
-          </Container>
-        </Section>
-      )}
+      {/* What your partnership helps make possible */}
+      <Section className="py-14">
+        <Container className="max-w-3xl text-center">
+          <SectionHeading title="What your partnership helps make possible" />
+          <p className="mt-6 text-muted-foreground">
+            More women trained and mentored, more work tools in the hands of
+            builders who need them, more events and cohorts, and more women
+            securing real opportunities in emerging technology.
+          </p>
+        </Container>
+      </Section>
 
-      <Section className="py-16">
+      {/* Partner form */}
+      <Section className="bg-warm py-16">
         <Container className="max-w-2xl">
           <SectionHeading
             title="Let's build something meaningful together"

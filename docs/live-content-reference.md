@@ -83,6 +83,30 @@ Host benefits: "Co-branded promotion across Web3Ladies channels" · "Experienced
 - Circle/Membership: "We're building something more intimate for women who are serious about going deeper. If that's you, we want you to know about it before anyone else does." · badge "Coming Soon" · CTA "Put Me on the List"
   (⚠️ Reconcile with the fuller cohorts/membership page content seen via rendered fetch — the live pages may show tracks/pricing AND a coming-soon capture. Verify against live before finalizing these two pages.)
 
+## Home page — section order (live, verified)
+1. Hero — "Build your career, product, or next chapter in emerging technologies." + sub "We built Web3Ladies for women like you…" · CTAs: "Join the Venture Builder", "Partner With Us"
+2. What's happening (Featured) — sub "Featured — Stay up to date with our latest programs, events, and announcements."
+3. "More than a community. A launchpad for women building what's next." + "Built with impact. Growing with intention." + impact stats
+4. With these partners
+5. What we offer (4 cards) + Cohorts & Web3Ladies Circle "coming soon" cards
+6. Choose your path (Join the Community / Apply to Venture Builder / Sponsor a Seat / Host an Event)
+7. Who this is for
+8. Our flagship experience → Web3 x AI Venture Builder
+9. Access that multiplies (sponsorship)
+10. What makes us different
+11. Final CTA "Ready to build what's next?" (CTAs: Join the Venture Builder, Join Community, Partner With Us)
+12. Founder's Story → "Why Web3Ladies exists"
+13. Proof of work — Women in our community are winning (social proof)
+14. Real stories from women in our community (testimonials)
+15. Newsletter "We don't do generic newsletters. This one is built for you." · button "I'm In, Subscribe Free"
+
+## Venture Builder — sections (live)
+Hero (badge "Flagship Program — 6 Weeks — Limited Seats") → What this program is about → Who it's for → Program modules → What participants get → **Investment** → What success looks like → Apply (Submit) → closing CTA "Join the next Web3 × AI Venture Builder and start turning curiosity into capability."
+
+## Partner — section order (live, 11)
+Why partner with us → Sponsor outcomes, not just activity → Proof of impact → What partnerships look like in practice → What our community says → Organizations we've worked with → Sponsorship packages → Ways to work with us → What your partnership helps make possible → Partner form → "Let's build something meaningful together". Custom tier price = "Let's Talk". Ways #8 = "Talent and visibility initiatives".
+⚠️ APPROXIMATE body copy (not fully observable, do NOT treat as verbatim): the narrative Partner sub-sections (Why partner / Sponsor outcomes / What partnerships look like / What your partnership makes possible) and the Home "Our flagship experience" + "Access that multiplies" paragraphs. Verify against live and refine.
+
 ## Admin labels leaked from bundle (for Phase 4)
 - Featured: "Add Item", "Featured Item"
 - Partners: "Add Partner", "Partner", "Past Partner"

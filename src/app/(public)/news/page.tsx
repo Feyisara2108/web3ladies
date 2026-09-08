@@ -7,12 +7,15 @@ import { getBlogPosts } from "@/lib/queries";
 
 export const metadata = { title: "News — Web3Ladies" };
 
+// Verbatim from the live site — see docs/live-content-reference.md
 const COVERAGE = [
+  "Web3Ladies updates",
   "Program announcements",
   "Event recaps",
   "Ecosystem insights",
   "Career stories",
   "AI x Web3 commentary",
+  "Opportunities and resources",
 ];
 
 function formatDate(date: string | null) {
@@ -31,8 +34,9 @@ export default async function NewsPage() {
             News, insights, and what's shaping the future
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">
-            Program updates, event announcements, ecosystem insights, and
-            community opportunities.
+            Stay connected to Web3Ladies updates, ecosystem trends, community
+            stories, and practical insights across blockchain, AI, and the
+            future of work.
           </p>
         </Container>
       </Section>
@@ -71,8 +75,8 @@ export default async function NewsPage() {
             <div className="rounded-xl border border-dashed border-border bg-muted/40 p-12 text-center">
               <h3 className="font-display text-xl font-semibold">Stories and insights coming soon</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                We're just getting started. Subscribe below to get updates that
-                actually help you grow.
+                We do not just want our community to participate in the future.
+                We want them to understand it, shape it, and stay ahead of it.
               </p>
             </div>
           )}
@@ -81,7 +85,10 @@ export default async function NewsPage() {
 
       <Section className="bg-warm py-16">
         <Container className="max-w-2xl text-center">
-          <SectionHeading title="Get updates that actually help you grow" />
+          <SectionHeading
+            title="Get updates that actually help you grow"
+            description="Subscribe for program updates, event announcements, ecosystem insights, and community opportunities."
+          />
           <div className="mt-8">
             <NewsletterSubscribe />
           </div>

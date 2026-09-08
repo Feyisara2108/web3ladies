@@ -132,7 +132,7 @@ export default async function VentureBuilderPage() {
 
       <Section className="py-14">
         <Container>
-          <SectionHeading title="Pricing" description="Flexible options, including need- and sponsorship-based seats." />
+          <SectionHeading title="Investment" description="Flexible options, including need- and sponsorship-based seats." />
           <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-xl border border-border">
             {PRICING.map((p, i) => (
               <div
@@ -150,7 +150,19 @@ export default async function VentureBuilderPage() {
         </Container>
       </Section>
 
-      <Section id="apply" className="bg-warm py-16">
+      {/* What success looks like */}
+      <Section className="bg-warm py-14">
+        <Container className="max-w-3xl text-center">
+          <SectionHeading title="What success looks like" />
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            By the end, you should walk away with stronger clarity, sharper
+            thinking, a validated idea or working concept, deeper confidence, and
+            a more visible next step.
+          </p>
+        </Container>
+      </Section>
+
+      <Section id="apply" className="py-16">
         <Container className="max-w-2xl">
           <SectionHeading
             title="Apply to the Web3 x AI Venture Builder"
@@ -163,8 +175,8 @@ export default async function VentureBuilderPage() {
       </Section>
 
       <CTASection
-        title="Ready to build with intention?"
-        description="Join the next cohort and convert curiosity into capability."
+        title="Ready to build what's next?"
+        description="Join the next Web3 x AI Venture Builder and start turning curiosity into capability."
         primary={{ label: "Apply Now", href: "#apply" }}
         secondary={{ label: "Sponsor a Seat", href: "/partner" }}
       />

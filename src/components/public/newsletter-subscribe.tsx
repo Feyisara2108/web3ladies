@@ -4,7 +4,11 @@ import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { subscribeNewsletter, type SubscribeState } from "@/app/actions/subscribe-newsletter";
 
-export function NewsletterSubscribe() {
+export function NewsletterSubscribe({
+  buttonLabel = "Subscribe",
+}: {
+  buttonLabel?: string;
+}) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<SubscribeState | null>(null);
   const [pending, startTransition] = useTransition();
@@ -31,7 +35,7 @@ export function NewsletterSubscribe() {
         className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       />
       <Button type="submit" disabled={pending}>
-        {pending ? "Subscribing…" : "Subscribe"}
+        {pending ? "Subscribing…" : buttonLabel}
       </Button>
       {state && !state.ok && (
         <p className="text-sm text-destructive sm:hidden">{state.message}</p>
