@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SVGProps } from "react";
 import { Container } from "@/components/ui/container";
+import { Logo } from "@/components/public/logo";
 import { SITE, FOOTER_LINKS, SOCIAL_LINKS } from "@/lib/site";
 
 // Brand glyphs as inline SVGs (lucide 1.x removed brand icons).
@@ -45,9 +46,7 @@ export function Footer() {
     <footer className="mt-auto border-t border-border bg-warm">
       <Container className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <div className="font-display text-lg font-bold text-primary">
-            {SITE.name}
-          </div>
+          <Logo />
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
             {SITE.tagline}
           </p>

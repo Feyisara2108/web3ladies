@@ -5,9 +5,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { NAV_LINKS, PRIMARY_CTAS, SITE } from "@/lib/site";
+import { NAV_LINKS, PRIMARY_CTAS } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { buttonVariants } from "@/components/ui/button";
+import { Logo } from "@/components/public/logo";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -16,9 +17,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold">
-          <span className="text-primary">{SITE.name}</span>
-        </Link>
+        <Logo />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 lg:flex">
