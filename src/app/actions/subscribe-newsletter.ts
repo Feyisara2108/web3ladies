@@ -9,7 +9,10 @@ export type SubscribeState = { ok: boolean; message: string };
  * (no form config needed) so it shows up in the admin Submissions view. Anon
  * inserts are permitted by RLS; reads are admin-only.
  */
-export async function subscribeNewsletter(email: string): Promise<SubscribeState> {
+export async function subscribeNewsletter(
+  email: string,
+  formKey: string = "newsletter",
+): Promise<SubscribeState> {
   const trimmed = email.trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
     return { ok: false, message: "Please enter a valid email address." };
@@ -18,7 +21,7 @@ export async function subscribeNewsletter(email: string): Promise<SubscribeState
     const supabase = await createClient();
     const { data: submission, error } = await supabase
       .from("submissions")
-      .insert({ form_key: "newsletter", source: "form", meta: {} })
+      .insert({ form_key: formKey, source: "form", meta: {} })
       .select("id")
       .single();
     if (error || !submission) throw error ?? new Error("insert failed");

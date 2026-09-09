@@ -44,31 +44,16 @@ const SOCIAL_ICONS: Record<string, IconType> = {
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-border bg-warm">
-      <Container className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
-        <div className="lg:col-span-2">
+      <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Col 1 — logo + mission */}
+        <div>
           <Logo />
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
             {SITE.tagline}
           </p>
-          <div className="mt-5 flex items-center gap-3">
-            {SOCIAL_LINKS.map((s) => {
-              const Icon = SOCIAL_ICONS[s.label] ?? Instagram;
-              return (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="inline-flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-                >
-                  <Icon className="size-4" />
-                </a>
-              );
-            })}
-          </div>
         </div>
 
+        {/* Col 2 — Quick Links */}
         <div>
           <h4 className="text-sm font-semibold">Quick Links</h4>
           <ul className="mt-4 space-y-2">
@@ -85,17 +70,62 @@ export function Footer() {
           </ul>
         </div>
 
+        {/* Col 3 — Connect */}
+        <div>
+          <h4 className="text-sm font-semibold">Connect</h4>
+          <ul className="mt-4 space-y-2">
+            {SOCIAL_LINKS.map((s) => {
+              const Icon = SOCIAL_ICONS[s.label] ?? Instagram;
+              return (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    <Icon className="size-4" />
+                    {s.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* Col 4 — Contact + Press Kit */}
         <div>
           <h4 className="text-sm font-semibold">Contact</h4>
           <p className="mt-4 text-sm text-muted-foreground">
-            For partnerships, media inquiries, and sponsorships:
+            We would love to work with you. For partnerships, media enquiries,
+            and sponsorship conversations, reach out directly at
           </p>
           <a
             href={`mailto:${SITE.email}`}
-            className="mt-2 inline-block text-sm font-medium text-primary hover:underline"
+            className="mt-1 inline-block text-sm font-medium text-primary hover:underline"
           >
             {SITE.email}
           </a>
+          <h4 className="mt-6 text-sm font-semibold">Press Kit</h4>
+          <ul className="mt-3 space-y-2">
+            {[
+              "Logo (Full)",
+              "Icon (Purple)",
+              "Icon (Gradient)",
+              "Icon (White)",
+              "Colour Guide",
+            ].map((label) => (
+              <li key={label}>
+                <a
+                  href="/assets/web3ladies-logo-Cd0zWIm7.png"
+                  download
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
 

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
@@ -8,8 +9,8 @@ export function SectionHeading({
   className,
 }: {
   eyebrow?: string;
-  title: string;
-  description?: string;
+  title: ReactNode;
+  description?: ReactNode;
   align?: "center" | "left";
   className?: string;
 }) {
@@ -22,9 +23,9 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-primary">
+        <span className="mb-3 inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
           {eyebrow}
-        </p>
+        </span>
       )}
       <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
       {description && (

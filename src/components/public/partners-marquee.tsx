@@ -26,7 +26,7 @@ export function PartnersMarquee({ partners }: { partners: Partner[] }) {
               alt={p.name}
               width={120}
               height={32}
-              className="h-6 w-auto object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
+              className="h-7 w-auto object-contain grayscale opacity-70 transition duration-300 hover:opacity-100 hover:grayscale-0"
             />
           ) : (
             <span className="whitespace-nowrap text-base font-semibold text-muted-foreground transition-colors hover:text-foreground">

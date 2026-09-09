@@ -129,3 +129,12 @@ h1, h2, h3, h4, h5, h6 {
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
+
+/* Hide scrollbars on horizontal carousels while keeping scroll/drag. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
