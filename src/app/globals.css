@@ -130,6 +130,22 @@ h1, h2, h3, h4, h5, h6 {
   animation: marquee 20s linear infinite;
 }
 
+/* Gentle float for the hero stat card. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float {
+    animation: none;
+  }
+}
+
 /* Hide scrollbars on horizontal carousels while keeping scroll/drag. */
 .no-scrollbar {
   scrollbar-width: none;

@@ -2,6 +2,7 @@ import { Container, Section } from "@/components/ui/container";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/public/section-heading";
+import { Reveal } from "@/components/public/reveal";
 import { DynamicForm } from "@/components/public/dynamic-form";
 import { getEvents, getFormConfig } from "@/lib/queries";
 import type { EventItem } from "@/lib/types";
@@ -71,20 +72,22 @@ export default async function EventsPage() {
     <>
       <Section className="pt-16 sm:pt-24">
         <Container className="max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Events that connect women to ideas, people, and possibility
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Educational gatherings — from workshops to masterclasses — designed
-            to help women learn and grow in emerging technology.
-          </p>
+          <Reveal>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              Events that connect women to ideas, people, and possibility
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground">
+              Educational gatherings — from workshops to masterclasses — designed
+              to help women learn and grow in emerging technology.
+            </p>
+          </Reveal>
         </Container>
       </Section>
 
       <Section className="py-14">
         <Container>
-          <SectionHeading eyebrow="What we focus on" title="Our event pillars" />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal><SectionHeading eyebrow="What we focus on" title="Our event pillars" /></Reveal>
+          <Reveal delay={120} className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p) => (
               <Card key={p.t} className="h-full">
                 <CardContent className="p-6">
@@ -93,19 +96,19 @@ export default async function EventsPage() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-2">
+          </Reveal>
+          <Reveal delay={200} className="mt-8 flex flex-wrap justify-center gap-2">
             {FORMATS.map((f) => (
               <Badge key={f} variant="secondary">{f}</Badge>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </Section>
 
       <Section className="bg-warm py-14">
         <Container>
-          <SectionHeading title="Upcoming events" />
-          <div className="mt-10">
+          <Reveal><SectionHeading title="Upcoming events" /></Reveal>
+          <Reveal delay={120} className="mt-10">
             {upcoming.length > 0 ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {upcoming.map((e) => <EventCard key={e.id} e={e} />)}
@@ -115,35 +118,37 @@ export default async function EventsPage() {
                 Check back soon for new workshops, AMAs, and community events.
               </p>
             )}
-          </div>
+          </Reveal>
         </Container>
       </Section>
 
       {past.length > 0 && (
         <Section className="py-14">
           <Container>
-            <SectionHeading title="Past events" />
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <Reveal><SectionHeading title="Past events" /></Reveal>
+            <Reveal delay={120} className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {past.map((e) => <EventCard key={e.id} e={e} />)}
-            </div>
+            </Reveal>
           </Container>
         </Section>
       )}
 
       <Section className="bg-warm py-16">
         <Container className="max-w-2xl">
-          <SectionHeading
-            title="Host with us"
-            description="Reach a growing community of women building in emerging technology."
-          />
-          <ul className="mx-auto mt-8 flex max-w-md flex-col gap-2">
-            {HOST_BENEFITS.map((b) => (
-              <li key={b} className="text-sm text-muted-foreground">• {b}</li>
-            ))}
-          </ul>
-          <div className="mt-8 rounded-2xl border border-border bg-card p-6 sm:p-8">
-            <DynamicForm config={config} formKey="event_host_request" fallbackTitle="Event Host Request" />
-          </div>
+          <Reveal>
+            <SectionHeading
+              title="Host with us"
+              description="Reach a growing community of women building in emerging technology."
+            />
+            <ul className="mx-auto mt-8 flex max-w-md flex-col gap-2">
+              {HOST_BENEFITS.map((b) => (
+                <li key={b} className="text-sm text-muted-foreground">• {b}</li>
+              ))}
+            </ul>
+            <div className="mt-8 rounded-2xl border border-border bg-card p-6 sm:p-8">
+              <DynamicForm config={config} formKey="event_host_request" fallbackTitle="Event Host Request" />
+            </div>
+          </Reveal>
         </Container>
       </Section>
     </>

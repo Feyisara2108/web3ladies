@@ -141,7 +141,7 @@ export default async function HomePage() {
                 priority
               />
             </div>
-            <div className="absolute -bottom-5 left-4 rounded-2xl border border-border bg-card p-4 shadow-lg">
+            <div className="animate-float absolute -bottom-5 left-4 rounded-2xl border border-border bg-card p-4 shadow-lg">
               <div className="font-display text-2xl font-bold text-primary">20,000+</div>
               <div className="text-xs text-muted-foreground">women reached across platforms</div>
             </div>
@@ -165,7 +165,7 @@ export default async function HomePage() {
 
       {/* 3 — FEATURED */}
       {featured.length > 0 && (
-        <Section className="py-16">
+        <Section className="bg-warm py-16">
           <Container>
             <Reveal>
               <SectionHeading eyebrow="What's happening" title="Featured" description="Stay up to date with our latest programs, events, and announcements." />
@@ -185,8 +185,8 @@ export default async function HomePage() {
                       <h3 className="font-display text-lg font-semibold leading-tight">{f.title}</h3>
                       {f.description && <p className="flex-1 text-sm text-muted-foreground">{f.description}</p>}
                       {f.cta_url && (
-                        <Link href={f.cta_url} className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-                          {f.cta_label ?? "Learn More"} <ArrowRight className="size-4" />
+                        <Link href={f.cta_url} className="group inline-flex items-center gap-1 text-sm font-medium text-primary">
+                          {f.cta_label ?? "Learn More"} <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                         </Link>
                       )}
                     </CardContent>
@@ -219,7 +219,7 @@ export default async function HomePage() {
 
       {/* 5 — STATS */}
       {impact.length > 0 && (
-        <Section className="py-16">
+        <Section className="bg-warm py-16">
           <Container>
             <Reveal>
               <SectionHeading title={<>Built with impact. <span className="text-primary">Growing with intention.</span></>} />
@@ -304,7 +304,7 @@ export default async function HomePage() {
       </Section>
 
       {/* 8 — CHOOSE YOUR PATH */}
-      <Section className="py-16">
+      <Section className="bg-warm py-16">
         <Container>
           <Reveal><SectionHeading title="Choose your path" /></Reveal>
           <Reveal delay={120} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -316,8 +316,8 @@ export default async function HomePage() {
                   </span>
                   <h3 className="font-display text-lg font-semibold">{p.title}</h3>
                   <p className="flex-1 text-sm text-muted-foreground">{p.body}</p>
-                  <Link href={p.href} className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-                    {p.cta} <ArrowRight className="size-4" />
+                  <Link href={p.href} className="group inline-flex items-center gap-1 text-sm font-medium text-primary">
+                    {p.cta} <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </CardContent>
               </Card>
@@ -410,7 +410,7 @@ export default async function HomePage() {
       </Section>
 
       {/* 13 — MID-PAGE CTA */}
-      <Section className="py-16">
+      <Section className="bg-secondary py-16">
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">

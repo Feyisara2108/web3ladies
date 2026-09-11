@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeading } from "@/components/public/section-heading";
+import { Reveal } from "@/components/public/reveal";
 import { NewsletterSubscribe } from "@/components/public/newsletter-subscribe";
 import { getBlogPosts } from "@/lib/queries";
 
@@ -30,32 +31,34 @@ export default async function NewsPage() {
     <>
       <Section className="pt-16 sm:pt-24">
         <Container className="max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            News, insights, and what's shaping the future
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Stay connected to Web3Ladies updates, ecosystem trends, community
-            stories, and practical insights across blockchain, AI, and the
-            future of work.
-          </p>
+          <Reveal>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              News, insights, and what&apos;s shaping the future
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground">
+              Stay connected to Web3Ladies updates, ecosystem trends, community
+              stories, and practical insights across blockchain, AI, and the
+              future of work.
+            </p>
+          </Reveal>
         </Container>
       </Section>
 
       <Section className="py-14">
         <Container>
-          <SectionHeading eyebrow="What we cover" title="Stories worth your time" />
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Reveal><SectionHeading eyebrow="What we cover" title="Stories worth your time" /></Reveal>
+          <Reveal delay={120} className="mt-8 flex flex-wrap justify-center gap-3">
             {COVERAGE.map((c) => (
               <span key={c} className="rounded-full border border-border bg-card px-4 py-2 text-sm">{c}</span>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </Section>
 
       <Section className="py-8">
         <Container>
           {posts.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <Reveal className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((p) => (
                 <Card key={p.id} className="h-full">
                   <CardContent className="flex h-full flex-col gap-2 p-6">
@@ -70,28 +73,30 @@ export default async function NewsPage() {
                   </CardContent>
                 </Card>
               ))}
-            </div>
+            </Reveal>
           ) : (
-            <div className="rounded-xl border border-dashed border-border bg-muted/40 p-12 text-center">
+            <Reveal className="rounded-xl border border-dashed border-border bg-muted/40 p-12 text-center">
               <h3 className="font-display text-xl font-semibold">Stories and insights coming soon</h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 We do not just want our community to participate in the future.
                 We want them to understand it, shape it, and stay ahead of it.
               </p>
-            </div>
+            </Reveal>
           )}
         </Container>
       </Section>
 
       <Section className="bg-warm py-16">
         <Container className="max-w-2xl text-center">
-          <SectionHeading
-            title="Get updates that actually help you grow"
-            description="Subscribe for program updates, event announcements, ecosystem insights, and community opportunities."
-          />
-          <div className="mt-8">
-            <NewsletterSubscribe />
-          </div>
+          <Reveal>
+            <SectionHeading
+              title="Get updates that actually help you grow"
+              description="Subscribe for program updates, event announcements, ecosystem insights, and community opportunities."
+            />
+            <div className="mt-8">
+              <NewsletterSubscribe />
+            </div>
+          </Reveal>
         </Container>
       </Section>
     </>

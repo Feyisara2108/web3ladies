@@ -35,7 +35,7 @@ export function CTASection({
             {secondary && (
               <Link
                 href={secondary.href}
-                className="inline-flex h-12 items-center justify-center rounded-lg border border-primary-foreground/30 px-8 text-base font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-primary-foreground/30 px-8 text-base font-medium text-primary-foreground transition-colors hover:bg-primary-foreground/10"
               >
                 {secondary.label}
               </Link>
