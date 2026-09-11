@@ -13,9 +13,11 @@ import {
   Handshake,
   Megaphone,
   Presentation,
+  Globe,
+  Star,
   ArrowRight,
+  ArrowUpRight,
   Check,
-  ExternalLink,
 } from "lucide-react";
 import { Container, Section } from "@/components/ui/container";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,7 +36,7 @@ import {
   getPartners,
   getFounderStory,
   getSocialProof,
-  getTestimonialsByPlacement,
+  getTestimonials,
 } from "@/lib/queries";
 
 // Verbatim copy from the live site — see docs/live-content-reference.md.
@@ -74,17 +76,17 @@ const AUDIENCES = [
 ];
 
 const DIFFERENTIATORS = [
-  { icon: Sparkles, text: "We are future-focused — always preparing women for the future of work, opportunity, and impact" },
+  { icon: Globe, text: "We are future-focused — always preparing women for the future of work, opportunity, and impact" },
   { icon: Target, text: "We care about practical outcomes, not just motivational language" },
   { icon: Users, text: "We combine skills, mentorship, exposure, and community support" },
-  { icon: Heart, text: "We are building a space where women can learn, build, lead, and be seen" },
+  { icon: Star, text: "We are building a space where women can learn, build, lead, and be seen" },
 ];
 
 const NEWSLETTER_PERKS = [
-  "Program updates and application windows",
-  "Event announcements and recordings",
-  "Ecosystem insights across Web3 and AI",
-  "Community opportunities, grants, and roles",
+  "First access to program openings and cohort announcements before we go public",
+  "Event invites, workshop schedules, and AMA drops straight to your inbox",
+  "Funding opportunities, grants, and ecosystem news curated for women builders",
+  "Honest stories from women in our community who are building real things right now",
 ];
 
 const FOUNDER_FALLBACK =
@@ -98,7 +100,7 @@ export default async function HomePage() {
       getPartners(),
       getFounderStory(),
       getSocialProof(),
-      getTestimonialsByPlacement("home"),
+      getTestimonials(),
     ]);
 
   const whyWeExist = founder.find((f) => f.section_key === "why") ?? founder[0];
@@ -141,7 +143,7 @@ export default async function HomePage() {
                 priority
               />
             </div>
-            <div className="animate-float absolute -bottom-5 left-4 rounded-2xl border border-border bg-card p-4 shadow-lg">
+            <div className="animate-float absolute -bottom-8 left-6 rounded-2xl border border-border bg-card p-4 shadow-lg">
               <div className="font-display text-2xl font-bold text-primary">20,000+</div>
               <div className="text-xs text-muted-foreground">women reached across platforms</div>
             </div>
@@ -329,13 +331,11 @@ export default async function HomePage() {
       {/* 9 — WHO THIS IS FOR */}
       <Section className="py-16">
         <Container className="max-w-4xl">
-          <Reveal><SectionHeading title="Who this is for" description="If any of these sound like you, you're in the right room." /></Reveal>
-          <Reveal delay={120} className="mt-10 space-y-4">
+          <Reveal><SectionHeading title="Who this is for" description="Whether you are just starting out or already building, Web3Ladies is designed to meet you where you are and help you move forward with clarity." /></Reveal>
+          <Reveal delay={120} className="mt-10 space-y-3">
             {AUDIENCES.map((a) => (
-              <div key={a.text} className="flex items-center gap-4 rounded-2xl border border-border bg-card p-5">
-                <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <a.icon className="size-5" />
-                </span>
+              <div key={a.text} className="flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-3.5">
+                <a.icon className="size-5 shrink-0 text-primary" />
                 <p className="text-sm text-foreground sm:text-base">{a.text}</p>
               </div>
             ))}
@@ -350,9 +350,10 @@ export default async function HomePage() {
             <Badge className="mb-4">Our flagship experience</Badge>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Web3 x AI Venture Builder</h2>
             <p className="mt-4 text-muted-foreground">
-              A high-conviction, application-based program for women building
-              future-ready careers, products, and opportunities across Web3, AI,
-              and the future of work.
+              The Web3 x AI Venture Builder is for women who want more than
+              passive learning. It is designed for practical growth — helping
+              participants learn fast, build confidently, validate ideas, and
+              create visible outcomes.
             </p>
             <div className="mt-6">
               <Link href="/venture-builder" className={buttonVariants({ size: "lg" })}>
@@ -362,7 +363,7 @@ export default async function HomePage() {
           </Reveal>
           <Reveal delay={120}>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border bg-muted">
-              <Image src="/assets/w3l-laptop-C5PsUtev.jpg" alt="Building at Web3Ladies" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+              <Image src="/assets/w3l-builder-COStughb.jpg" alt="Building on a laptop at Web3Ladies" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
             </div>
           </Reveal>
         </Container>
@@ -377,9 +378,9 @@ export default async function HomePage() {
             </span>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Access that multiplies</h2>
             <p className="mt-4 text-muted-foreground">
-              Fund scholarship seats and work tools, and help widen access for
-              women building in emerging technology. Every partnership maps to a
-              concrete outcome.
+              Revenue from our premium programs helps fund scholarship seats,
+              work tool support, and broader access for women building in
+              emerging technology.
             </p>
             <div className="mt-8">
               <Link href="/partner" className={buttonVariants({ variant: "outline", size: "lg" })}>
@@ -398,9 +399,7 @@ export default async function HomePage() {
             {DIFFERENTIATORS.map((d) => (
               <Card key={d.text} className="h-full">
                 <CardContent className="flex items-start gap-4 p-6">
-                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <d.icon className="size-5" />
-                  </span>
+                  <d.icon className="size-6 shrink-0 text-primary" />
                   <p className="font-medium">{d.text}</p>
                 </CardContent>
               </Card>
@@ -410,14 +409,15 @@ export default async function HomePage() {
       </Section>
 
       {/* 13 — MID-PAGE CTA */}
-      <Section className="bg-secondary py-16">
+      <Section className="py-16">
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               Ready to build <span className="text-primary">what&rsquo;s next?</span>
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Join the community, apply to the Venture Builder, or partner with us.
+              Join a platform designed to help women move from curiosity to
+              confidence — and from confidence to real-world outcomes.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link href="/venture-builder" className={buttonVariants({ size: "lg" })}>Join the Venture Builder</Link>
@@ -432,7 +432,7 @@ export default async function HomePage() {
       <Section className="py-16">
         <Container className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-muted">
+            <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-muted">
               <Image src={whyWeExist?.image_url ?? "/assets/founder-oluchi-BnQV3JEa.png"} alt="Oluchi Enebeli, Founder of Web3Ladies" fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover" />
             </div>
           </Reveal>
@@ -453,9 +453,16 @@ export default async function HomePage() {
                 <div className="font-semibold">Oluchi Enebeli</div>
                 <div className="text-sm text-muted-foreground">Founder, Web3Ladies</div>
               </div>
-              <a href="https://www.linkedin.com/company/web3ladies/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn" className="text-primary hover:text-primary/80">
-                <ExternalLink className="size-5" />
-              </a>
+              <div className="flex items-center gap-3">
+                <Link href="/community" className={buttonVariants({ variant: "outline", size: "sm" })}>
+                  Read Full Story <ArrowUpRight className="size-4" />
+                </Link>
+                <a href="https://www.linkedin.com/company/web3ladies/" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn" className="inline-flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground transition-colors hover:bg-primary/90">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="size-5">
+                    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.02H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </Reveal>
         </Container>
@@ -466,7 +473,7 @@ export default async function HomePage() {
         <Section className="py-16">
           <Container>
             <Reveal>
-              <SectionHeading eyebrow="Proof of work" title={<>Women in our community are <span className="text-primary">winning</span></>} description="Real wins from women building, shipping, and getting recognized." />
+              <SectionHeading eyebrow="Proof of work" title={<>Women in our community are <span className="text-primary">winning</span></>} description="Real posts. Real wins. Straight from the women building with us." />
             </Reveal>
             <Reveal delay={120} className="mt-10">
               <ProofCarousel items={social} />
@@ -498,7 +505,7 @@ export default async function HomePage() {
       <Section className="py-16">
         <Container className="max-w-2xl text-center">
           <Reveal>
-            <SectionHeading title={<>We don&rsquo;t do generic newsletters. This one is built for you.</>} description="Subscribe for program updates, event announcements, ecosystem insights, and community opportunities." />
+            <SectionHeading title={<>We don&rsquo;t do generic newsletters. This one is built for you.</>} description="We send things that actually matter to women building in emerging tech. Not noise, not filler. If you are serious about staying close to what is happening at the frontier, this is where you want to be." />
             <div className="mx-auto mt-8 max-w-md text-left">
               <p className="text-sm font-semibold">What you&rsquo;ll get:</p>
               <ul className="mt-3 space-y-2">

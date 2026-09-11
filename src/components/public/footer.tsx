@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { SVGProps } from "react";
+import { Download } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/public/logo";
 import { SITE, FOOTER_LINKS, SOCIAL_LINKS } from "@/lib/site";
@@ -119,8 +120,9 @@ export function Footer() {
                 <a
                   href="/assets/web3ladies-logo-Cd0zWIm7.png"
                   download
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
+                  <Download className="size-4 shrink-0" />
                   {label}
                 </a>
               </li>
@@ -130,7 +132,7 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-border">
-        <Container className="flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted-foreground sm:flex-row">
+        <Container className="flex flex-col items-center justify-center gap-2 py-6 text-center text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
         </Container>
       </div>

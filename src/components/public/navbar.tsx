@@ -16,11 +16,11 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex h-14 items-center justify-between gap-4">
         <Logo />
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-6 lg:ml-auto lg:flex">
           {NAV_LINKS.map((link) => {
             const active =
               link.href === "/"
