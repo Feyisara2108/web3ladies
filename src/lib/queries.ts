@@ -16,6 +16,8 @@ import type {
   PartnerRow,
   SocialProofRow,
   FounderStoryRow,
+  ImpactHighlightRow,
+  ImpactStatRow,
 } from "@/lib/types";
 
 /**
@@ -181,3 +183,11 @@ export async function getPublishedFounderStory(): Promise<FounderStoryRow | null
 /** All published events, newest first (the Events page splits upcoming/past). */
 export const getPublishedEvents = () =>
   fetchRows<EventRow>("events", [published], { column: "event_date", ascending: false });
+
+export const getImpactHighlights = () =>
+  fetchRows<ImpactHighlightRow>("impact_highlights", [published], { column: "display_order" });
+
+export const getImpactStatsForPage = (page: string) =>
+  fetchRows<ImpactStatRow>("impact_stats", [published, { column: "page", value: page }], {
+    column: "display_order",
+  });

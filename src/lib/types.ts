@@ -211,3 +211,24 @@ export type FeaturedCard = {
   /** Featured events without a description show "<type> — <date>", formatted in the browser. */
   eventDate?: string | null;
 };
+
+export type ImpactHighlightRow = {
+  id: string;
+  title: string;
+  description: string | null;
+  icon: string | null;
+  report_url: string | null;
+  report_label: string | null;
+  display_order: number;
+  is_published: boolean;
+};
+
+export type ImpactStatRow = {
+  id: string;
+  value: string;
+  label: string;
+  description: string | null;
+  page: string | null;
+  display_order: number;
+  is_published: boolean;
+};
