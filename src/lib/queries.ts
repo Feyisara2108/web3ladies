@@ -10,6 +10,12 @@ import type {
   ImpactStat,
   FounderSection,
   FormConfig,
+  FeaturedCard,
+  FeaturedItemRow,
+  EventRow,
+  PartnerRow,
+  SocialProofRow,
+  FounderStoryRow,
 } from "@/lib/types";
 
 /**
@@ -95,4 +101,82 @@ export async function getFormConfig(key: string): Promise<FormConfig | null> {
     console.error(`[queries] failed to read form ${key}:`, (err as Error).message);
     return null;
   }
+}
+
+/* ── Original (Lovable) schema reads — used by the faithful page ports ── */
+
+type Filter = { column: string; value: string | boolean };
+
+async function fetchRows<T>(
+  table: string,
+  filters: Filter[],
+  order: { column: string; ascending?: boolean },
+): Promise<T[]> {
+  if (!isConfigured()) return [];
+  try {
+    const supabase = await createClient();
+    let query = supabase.from(table).select("*");
+    for (const f of filters) query = query.eq(f.column, f.value);
+    const { data, error } = await query.order(order.column, {
+      ascending: order.ascending ?? true,
+    });
+    if (error) throw error;
+    return (data ?? []) as T[];
+  } catch (err) {
+    console.error(`[queries] failed to read ${table}:`, (err as Error).message);
+    return [];
+  }
+}
+
+const published: Filter = { column: "is_published", value: true };
+
+/** Featured items + featured events, merged the same way the live site does. */
+export async function getHomeFeatured(): Promise<FeaturedCard[]> {
+  const [items, events] = await Promise.all([
+    fetchRows<FeaturedItemRow>("featured_items", [published], { column: "display_order" }),
+    fetchRows<EventRow>("events", [published, { column: "is_featured", value: true }], {
+      column: "event_date",
+    }),
+  ]);
+  return [
+    ...items.map((i) => ({
+      type: i.type,
+      title: i.title,
+      description: i.description,
+      href: i.href,
+      cta: i.cta,
+      badge: i.badge,
+      icon: i.icon,
+      image: null,
+    })),
+    ...events.map((e) => ({
+      type: "event",
+      title: e.title,
+      description:
+        e.description ??
+        (e.event_date
+          ? `${e.event_type ?? "Event"} — ${new Date(e.event_date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`
+          : (e.event_type ?? "Event")),
+      href: `/events?event=${e.id}`,
+      cta: e.status === "past" ? "View Event" : "Learn More",
+      badge: e.event_type ?? "Event",
+      icon: "calendar",
+      image: e.gallery_images?.[0] ?? e.image_url ?? null,
+    })),
+  ];
+}
+
+export const getPartnersByCategory = (category: string) =>
+  fetchRows<PartnerRow>("partners", [published, { column: "category", value: category }], {
+    column: "display_order",
+  });
+
+export const getSocialProofItems = () =>
+  fetchRows<SocialProofRow>("social_proof_items", [published], { column: "display_order" });
+
+export async function getPublishedFounderStory(): Promise<FounderStoryRow | null> {
+  const rows = await fetchRows<FounderStoryRow>("founder_story", [published], {
+    column: "created_at",
+  });
+  return rows[0] ?? null;
 }
