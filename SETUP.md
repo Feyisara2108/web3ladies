@@ -18,21 +18,24 @@ npm install
    - `service_role` key → `SUPABASE_SERVICE_ROLE_KEY` (server-only, keep secret)
 3. Paste them into `.env.local` (see `.env.example`).
 
-## 3. Run the database migrations
+## 3. Set up the database
 
-In the Supabase Dashboard **SQL Editor**, run these files in order:
+In the Supabase Dashboard **SQL Editor**, paste and run `supabase/RUN_ALL.sql`.
+It runs these in order (each is also in `supabase/migrations/`):
 
-1. `supabase/migrations/0001_init.sql` — tables, roles, triggers
-2. `supabase/migrations/0002_rls.sql` — Row Level Security policies
-3. `supabase/migrations/0003_storage.sql` — media storage bucket + policies
+1. `0001_schema.sql` — tables (same names/columns as the original site), roles, triggers
+2. `0002_rls.sql` — Row Level Security policies
+3. `0003_storage.sql` — public `media` storage bucket + policies
+4. `0004_seed.sql` — the original site's content (events, partners, testimonials, …)
 
-(Or use the Supabase CLI: `supabase db push`.)
+It is safe to run again; nothing is duplicated.
 
 ## 4. Create the first admin
 
-In **Authentication → Users**, add a user with an email + password.
-The **first** user to sign up is automatically promoted to `superadmin`
-(bootstraps User Management); later users default to `admin`.
+In **Authentication → Users → Add user**, create a user with an email + password
+(tick "Auto Confirm User"). The **first** account becomes `superadmin`; later
+accounts start as `user` (no admin access) until a superadmin changes their role
+in the admin's User Management screen.
 
 ## 5. Run the app
 
