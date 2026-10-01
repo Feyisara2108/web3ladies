@@ -9,9 +9,13 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+// Include the optical-size axis (and italics) like the live site's Google Fonts
+// request, so glyphs are shaped identically at every text size.
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   display: "swap",
 });
 

@@ -52,7 +52,9 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+    /* Font names used directly (not the next/font variables) so missing glyphs such
+       as "→" fall back to system-ui like the live site, not next/font's Arial fallback. */
+    font-family: "DM Sans", system-ui, sans-serif;
   }
 
   h1,
@@ -61,7 +63,7 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+    font-family: "Space Grotesk", system-ui, sans-serif;
   }
 }
 
