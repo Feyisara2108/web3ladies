@@ -99,3 +99,18 @@ export type ImpactStatRow = {
   display_order: number;
   is_published: boolean;
 };
+
+export type TestimonialRow = {
+  id: string;
+  name: string;
+  role: string | null;
+  category: string | null;
+  highlight: string | null;
+  full_quote: string | null;
+  image_url: string | null;
+  is_featured: boolean;
+  display_order: number;
+  page: string;
+  is_published: boolean;
+  source_url: string | null;
+};
