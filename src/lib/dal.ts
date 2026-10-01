@@ -1,59 +1,38 @@
 import "server-only";
 import { cache } from "react";
-import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-export type AppRole = "superadmin" | "admin";
+export type AppRole = "user" | "admin" | "superadmin";
 
 export type SessionUser = {
   id: string;
   email: string | null;
   role: AppRole;
-  fullName: string | null;
 };
 
 /**
- * Data Access Layer — the single source of truth for "who is calling and what
- * are they allowed to do". Call this at the top of every admin Server
- * Component, Server Action and Route Handler. RLS is the last line of defense;
- * this is the application-level gate.
- *
- * Memoized per-request with React.cache so repeated calls in one render pass
- * hit Supabase once.
+ * Data Access Layer for server code (Route Handlers): who is calling and what
+ * role they have, read from `user_roles`. RLS remains the final gate.
+ * Memoized per request with React.cache.
  */
 export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
   if (!user) return null;
 
-  // Role + profile live in the `profiles` table, keyed by auth user id.
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role, full_name")
-    .eq("id", user.id)
-    .single();
+  const { data } = await supabase
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", user.id)
+    .maybeSingle();
 
-  return {
-    id: user.id,
-    email: user.email ?? null,
-    role: (profile?.role as AppRole) ?? "admin",
-    fullName: profile?.full_name ?? null,
-  };
+  return { id: user.id, email: user.email ?? null, role: (data?.role as AppRole) ?? "user" };
 });
 
-/** Require any authenticated admin; redirect to login otherwise. */
-export async function requireUser(): Promise<SessionUser> {
+/** The calling user if they are a superadmin, otherwise null. */
+export async function getSuperadmin(): Promise<SessionUser | null> {
   const user = await getSessionUser();
-  if (!user) redirect("/w3l-admin");
-  return user;
-}
-
-/** Require a superadmin (e.g. User Management). Redirect admins to dashboard. */
-export async function requireSuperadmin(): Promise<SessionUser> {
-  const user = await requireUser();
-  if (user.role !== "superadmin") redirect("/w3l-admin/dashboard");
-  return user;
+  return user?.role === "superadmin" ? user : null;
 }
