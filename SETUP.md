@@ -20,6 +20,11 @@ npm install
 
 ## 3. Set up the database
 
+**Reusing a project that ran the earlier setup scripts?** (It has tables such as
+`profiles`, `forms`, `submissions` or `social_proof`.) First export anything you
+want to keep, then paste and run `supabase/reset_old_schema.sql` in the SQL
+Editor. It deletes only those old tables; login accounts and uploaded media stay.
+
 In the Supabase Dashboard **SQL Editor**, paste and run `supabase/RUN_ALL.sql`.
 It runs these in order (each is also in `supabase/migrations/`):
 
@@ -33,7 +38,8 @@ It is safe to run again; nothing is duplicated.
 ## 4. Create the first admin
 
 In **Authentication → Users → Add user**, create a user with an email + password
-(tick "Auto Confirm User"). The **first** account becomes `superadmin`; later
+(tick "Auto Confirm User"). The **first** account becomes `superadmin` (if
+accounts already existed when you ran `RUN_ALL.sql`, the oldest one does); later
 accounts start as `user` (no admin access) until a superadmin changes their role
 in the admin's User Management screen.
 
