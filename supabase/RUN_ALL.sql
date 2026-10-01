@@ -55,6 +55,16 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
+-- Accounts that existed before this script ran: if no roles exist yet, the
+-- oldest account becomes superadmin and the rest start as 'user'.
+insert into public.user_roles (user_id, role)
+select id,
+       case when row_number() over (order by created_at) = 1
+            then 'superadmin'::public.app_role else 'user'::public.app_role end
+from auth.users
+where not exists (select 1 from public.user_roles)
+on conflict (user_id) do nothing;
+
 -- ---------------------------------------------------------------------------
 -- updated_at helper
 -- ---------------------------------------------------------------------------
