@@ -4,12 +4,12 @@ import { NextResponse, type NextRequest } from "next/server";
 /**
  * Next.js 16 Proxy (formerly middleware). Two jobs:
  *   1. Refresh the Supabase auth session cookie on every matched request.
- *   2. Optimistic guard: bounce unauthenticated users away from /w3l-admin
- *      (except the login page) to the login screen.
+ *   2. Optimistic guard: send signed-out visitors on admin screens to the
+ *      admin login (the login and reset-password pages stay open).
  *
- * This is an OPTIMISTIC check only. Real authorization is enforced again in the
- * DAL (see src/lib/dal.ts) and inside every Server Action / Route Handler, plus
- * database RLS. Never rely on the proxy alone.
+ * This is an OPTIMISTIC check only. The admin pages re-check the user's role,
+ * the users API checks it on the server (src/lib/dal.ts), and database RLS is
+ * the final gate. Never rely on the proxy alone.
  */
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -52,11 +52,12 @@ export async function proxy(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
   const isAdminRoute = path.startsWith("/w3l-admin");
-  const isLoginRoute = path === "/w3l-admin" || path === "/w3l-admin/login";
+  const isOpenRoute =
+    path === "/w3l-admin/login" || path === "/w3l-admin/reset-password";
 
-  if (isAdminRoute && !isLoginRoute && !user) {
+  if (isAdminRoute && !isOpenRoute && !user) {
     const url = request.nextUrl.clone();
-    url.pathname = "/w3l-admin";
+    url.pathname = "/w3l-admin/login";
     return NextResponse.redirect(url);
   }
 
