@@ -6,7 +6,6 @@ import { createClient } from "@/lib/supabase/client";
 
 /** Session + admin-role state for the admin portal (port of the live site's hook). */
 export function useAdminAuth() {
-  const supabase = createClient();
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +14,7 @@ export function useAdminAuth() {
   const checkRole = useCallback(
     async (userId: string) => {
       try {
-        const { data } = await supabase
+        const { data } = await createClient()
           .from("user_roles")
           .select("role")
           .eq("user_id", userId)
@@ -25,10 +24,12 @@ export function useAdminAuth() {
         setIsAdmin(false);
       }
     },
-    [supabase],
+    [],
   );
 
   useEffect(() => {
+    // Created here (not during render) so pages can prerender without env vars.
+    const supabase = createClient();
     let active = true;
     const {
       data: { subscription },
@@ -59,7 +60,7 @@ export function useAdminAuth() {
       active = false;
       subscription.unsubscribe();
     };
-  }, [supabase, checkRole]);
+  }, [checkRole]);
 
   return {
     user,
@@ -67,7 +68,7 @@ export function useAdminAuth() {
     loading,
     isAdmin,
     signIn: (email: string, password: string) =>
-      supabase.auth.signInWithPassword({ email, password }),
-    signOut: () => supabase.auth.signOut(),
+      createClient().auth.signInWithPassword({ email, password }),
+    signOut: () => createClient().auth.signOut(),
   };
 }
