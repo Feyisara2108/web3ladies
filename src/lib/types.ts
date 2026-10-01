@@ -114,3 +114,32 @@ export type TestimonialRow = {
   is_published: boolean;
   source_url: string | null;
 };
+
+export type CohortRow = {
+  id: string;
+  title: string;
+  description: string | null;
+  track: string;
+  cohort_number: number | null;
+  start_date: string | null;
+  end_date: string | null;
+  application_url: string | null;
+  status: string;
+  total_participants: number;
+  completion_rate: number | null;
+  is_published: boolean;
+};
+
+export type BlogPostRow = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  content: string | null;
+  author_name: string | null;
+  category: string;
+  is_featured: boolean;
+  is_published: boolean;
+  published_at: string | null;
+  created_at: string;
+};
