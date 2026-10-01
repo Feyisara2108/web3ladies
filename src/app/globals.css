@@ -1,156 +1,106 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /*
-  Web3Ladies design system — tokens extracted verbatim from the live site's
-  compiled CSS (web3ladies.lovable.app). Light-mode only. HSL triples follow
-  the shadcn convention: consumed as hsl(var(--token)).
+  Web3Ladies design tokens — copied verbatim from the live site's compiled CSS
+  (web3ladies.lovable.app). HSL triples, consumed as hsl(var(--token)).
 */
+@layer base {
+  :root {
+    --background: 30 30% 99%;
+    --foreground: 240 10% 10%;
+    --card: 30 25% 99%;
+    --card-foreground: 240 10% 10%;
+    --popover: 30 25% 99%;
+    --popover-foreground: 240 10% 10%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 280 20% 96%;
+    --secondary-foreground: 240 10% 18%;
+    --muted: 280 10% 95%;
+    --muted-foreground: 240 5% 45%;
+    --accent: 262 60% 50%;
+    --accent-foreground: 0 0% 100%;
+    --rose: 340 65% 60%;
+    --rose-light: 340 50% 94%;
+    --coral: 15 80% 65%;
+    --coral-light: 20 60% 95%;
+    --warm: 30 40% 97%;
+    --warm-deep: 28 35% 93%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 280 12% 91%;
+    --input: 280 12% 91%;
+    --ring: 262 83% 58%;
+    --radius: 0.75rem;
+    --gold: 38 50% 55%;
+    --sand: 38 25% 85%;
+    --sidebar-background: 280 10% 98%;
+    --sidebar-foreground: 240 10% 18%;
+    --sidebar-primary: 262 83% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 280 20% 96%;
+    --sidebar-accent-foreground: 240 10% 18%;
+    --sidebar-border: 280 12% 91%;
+    --sidebar-ring: 262 83% 58%;
+  }
 
-:root {
-  --background: 30 30% 99%;
-  --foreground: 240 10% 10%;
+  * {
+    @apply border-border;
+  }
 
-  --card: 30 25% 99%;
-  --card-foreground: 240 10% 10%;
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  }
 
-  --popover: 30 25% 99%;
-  --popover-foreground: 240 10% 10%;
-
-  --primary: 262 83% 58%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 280 20% 96%;
-  --secondary-foreground: 240 10% 18%;
-
-  --muted: 280 10% 95%;
-  --muted-foreground: 240 5% 45%;
-
-  --accent: 262 60% 50%;
-  --accent-foreground: 0 0% 100%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 280 12% 91%;
-  --input: 280 12% 91%;
-  --ring: 262 83% 58%;
-
-  --radius: 0.75rem;
-
-  /* Brand extras (badges, gradients) */
-  --coral: 15 80% 65%;
-  --coral-light: 20 60% 95%;
-  --gold: 38 50% 55%;
-  --rose: 340 65% 60%;
-  --rose-light: 340 50% 94%;
-  --sand: 38 25% 85%;
-  --warm: 30 40% 97%;
-  --warm-deep: 28 35% 93%;
-
-  /* Admin sidebar */
-  --sidebar-background: 280 10% 98%;
-  --sidebar-foreground: 240 10% 18%;
-  --sidebar-primary: 262 83% 58%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 280 20% 96%;
-  --sidebar-accent-foreground: 240 10% 18%;
-  --sidebar-border: 280 12% 91%;
-  --sidebar-ring: 262 83% 58%;
-}
-
-@theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-
-  --color-coral: hsl(var(--coral));
-  --color-coral-light: hsl(var(--coral-light));
-  --color-gold: hsl(var(--gold));
-  --color-rose: hsl(var(--rose));
-  --color-rose-light: hsl(var(--rose-light));
-  --color-sand: hsl(var(--sand));
-  --color-warm: hsl(var(--warm));
-  --color-warm-deep: hsl(var(--warm-deep));
-
-  --color-sidebar: hsl(var(--sidebar-background));
-  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
-  --color-sidebar-primary: hsl(var(--sidebar-primary));
-  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
-  --color-sidebar-accent: hsl(var(--sidebar-accent));
-  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
-  --color-sidebar-border: hsl(var(--sidebar-border));
-  --color-sidebar-ring: hsl(var(--sidebar-ring));
-
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-
-  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
-}
-
-* {
-  border-color: hsl(var(--border));
-}
-
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-}
-
-/* Partner logo marquee — matches the live site (20s linear, seamless -50%). */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee 20s linear infinite;
-}
-
-/* Gentle float for the hero stat card. */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-float {
-    animation: none;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
   }
 }
 
-/* Hide scrollbars on horizontal carousels while keeping scroll/drag. */
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Custom utilities ported verbatim from the live site. */
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-xl;
+    background: hsl(var(--background) / 0.92);
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .glow-purple {
+    box-shadow:
+      0 4px 24px -4px #7c3bed4d,
+      0 2px 12px -2px #db578326;
+  }
+
+  .bg-section-alt {
+    background-color: hsl(var(--warm));
+  }
+
+  .bg-section-rose {
+    background: linear-gradient(180deg, hsl(var(--rose-light)), hsl(var(--warm)));
+  }
+
+  .blob-decoration {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    opacity: 0.15;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
