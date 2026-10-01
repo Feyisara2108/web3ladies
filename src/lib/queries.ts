@@ -178,3 +178,6 @@ export async function getPublishedFounderStory(): Promise<FounderStoryRow | null
   return rows[0] ?? null;
 }
 
+/** All published events, newest first (the Events page splits upcoming/past). */
+export const getPublishedEvents = () =>
+  fetchRows<EventRow>("events", [published], { column: "event_date", ascending: false });
