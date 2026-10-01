@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Heart, Megaphone, Rocket, Star, Zap } from "lucide-react";
 import type { FeaturedCard } from "@/lib/types";
+import { LocalDate } from "./local-date";
 
 const FALLBACK: FeaturedCard[] = [
   {
@@ -107,7 +108,15 @@ export function FeaturedSection({ items }: { items: FeaturedCard[] }) {
                       {card.title}
                     </h3>
                     <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
-                      {card.description}
+                      {card.description ?? (
+                        <>
+                          {card.badge} —{" "}
+                          <LocalDate
+                            iso={card.eventDate!}
+                            options={{ month: "short", day: "numeric", year: "numeric" }}
+                          />
+                        </>
+                      )}
                     </p>
                     <span className="inline-flex items-center text-xs font-medium text-primary gap-1">
                       {card.cta}{" "}

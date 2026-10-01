@@ -152,11 +152,8 @@ export async function getHomeFeatured(): Promise<FeaturedCard[]> {
     ...events.map((e) => ({
       type: "event",
       title: e.title,
-      description:
-        e.description ??
-        (e.event_date
-          ? `${e.event_type ?? "Event"} — ${new Date(e.event_date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`
-          : (e.event_type ?? "Event")),
+      description: e.description ?? (e.event_date ? null : (e.event_type ?? "Event")),
+      eventDate: e.description ? null : e.event_date,
       href: `/events?event=${e.id}`,
       cta: e.status === "past" ? "View Event" : "Learn More",
       badge: e.event_type ?? "Event",
@@ -180,3 +177,4 @@ export async function getPublishedFounderStory(): Promise<FounderStoryRow | null
   });
   return rows[0] ?? null;
 }
+

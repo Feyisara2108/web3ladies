@@ -208,4 +208,6 @@ export type FeaturedCard = {
   badge: string | null;
   icon: string | null;
   image: string | null;
+  /** Featured events without a description show "<type> — <date>", formatted in the browser. */
+  eventDate?: string | null;
 };
