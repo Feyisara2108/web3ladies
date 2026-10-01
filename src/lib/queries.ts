@@ -1,3 +1,4 @@
+import { unstable_rethrow } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type {
   FeaturedCard,
@@ -42,6 +43,8 @@ async function fetchRows<T>(
     if (error) throw error;
     return (data ?? []) as T[];
   } catch (err) {
+    // Let Next.js handle its own signals (e.g. "render this page per request").
+    unstable_rethrow(err);
     console.error(`[queries] failed to read ${table}:`, (err as Error).message);
     return [];
   }
