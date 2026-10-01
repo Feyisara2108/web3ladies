@@ -2,7 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 
-export type AppRole = "user" | "admin" | "superadmin";
+export type AppRole = "user" | "moderator" | "admin" | "superadmin";
 
 export type SessionUser = {
   id: string;
