@@ -25,9 +25,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${dmSans.variable} h-full`}
+      className={`${spaceGrotesk.variable} ${dmSans.variable}`}
     >
-      <body className="min-h-full flex flex-col">
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
