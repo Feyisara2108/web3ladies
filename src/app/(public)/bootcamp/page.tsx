@@ -1,6 +1,6 @@
 import { VentureBuilderView } from "@/components/site/venture-builder-view";
 
-// The live site serves the Venture Builder page at /bootcamp as well.
+// /bootcamp shows the same Venture Builder landing page.
 export default function BootcampPage() {
   return <VentureBuilderView />;
 }
