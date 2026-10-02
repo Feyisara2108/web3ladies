@@ -1,7 +1,7 @@
 # Web3Ladies — Local Setup
 
 Reconstruction of the Web3Ladies public website + admin CMS.
-Stack: **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · Supabase (Auth/Postgres/RLS/Storage) · react-hook-form + zod · TanStack Query · SheetJS**.
+Stack: **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v3 · Supabase (Auth/Postgres/RLS/Storage) · TanStack Query · SheetJS**.
 
 ## 1. Install dependencies
 
@@ -54,7 +54,9 @@ npm run dev
 
 ## Security notes
 
-- The `service_role` key is used **only** in server code (Server Actions /
-  Route Handlers) guarded by `server-only`. Never import it into client code.
-- Authorization is enforced in three layers: the auth **proxy** (`src/proxy.ts`,
-  optimistic), the **DAL** (`src/lib/dal.ts`, per-request), and database **RLS**.
+- The `service_role` key is used **only** by the user management route
+  (`src/app/api/admin/users`), through `src/lib/supabase/admin.ts`, which is
+  guarded by `server-only`. Never import it into client code.
+- Authorization is enforced in layers: the auth **proxy** (`src/proxy.ts`,
+  optimistic redirect to login), the admin **role check** in the browser, the
+  **DAL** (`src/lib/dal.ts`) on the server, and database **RLS** as the final gate.
