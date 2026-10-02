@@ -15,9 +15,7 @@ import { COHORT, type CohortPlan } from "@/lib/venture-cohort";
 import { ConfigForm } from "./config-form";
 import { useCountdown } from "./venture/countdown";
 
-const IMG_GROUP = "/assets/w3l-women-group-UPu09Eav.jpg";
 const IMG_BUILDER = "/assets/w3l-builder-COStughb.jpg";
-const IMG_WINNERS = "/assets/w3l-winners-Cd7D9yXO.jpg";
 const IMG_FOUNDER = "/assets/founder-oluchi-BnQV3JEa.png";
 
 const scrollTo = (id: string) =>
@@ -67,12 +65,6 @@ const IDEAS = [
   "A rewards app for community members",
   "A marketplace for African creators",
   "An AI assistant for small business owners",
-];
-
-const STATS = [
-  { value: "20,000+", label: "women reached" },
-  { value: "483+", label: "women accepted and trained" },
-  { value: "77+", label: "graduates" },
 ];
 
 const FAQS = [
@@ -157,12 +149,12 @@ export function VentureBuilderView() {
     <div>
       {/* Hero */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 px-6">
-        <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="space-y-7"
+            className="space-y-7 max-w-3xl"
           >
             <p className="text-sm font-medium text-primary">
               Web3 × AI Venture Builder · {COHORT.name}, {COHORT.startMonth}
@@ -202,14 +194,6 @@ export function VentureBuilderView() {
               </div>
             </dl>
           </motion.div>
-          <motion.img
-            src={IMG_GROUP}
-            alt="Women at a Web3Ladies event"
-            className="w-full rounded-2xl object-cover aspect-[4/3]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          />
         </div>
       </section>
 
@@ -293,36 +277,8 @@ export function VentureBuilderView() {
         </div>
       </section>
 
-      {/* Proof */}
-      <section className="py-16 lg:py-24 px-6 bg-section-alt">
-        <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-8">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground leading-tight">
-              Our members build things, and they win.
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Web3Ladies has supported thousands of women learning and building in tech. Members have
-              won prizes at the Celo MiniPay Hack, Web3 Lagos and our own buildathons.
-            </p>
-            <dl className="grid grid-cols-3 gap-6">
-              {STATS.map((s) => (
-                <div key={s.label}>
-                  <dt className="text-3xl font-display font-bold text-foreground">{s.value}</dt>
-                  <dd className="text-sm text-muted-foreground mt-1">{s.label}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-          <img
-            src={IMG_WINNERS}
-            alt="Web3Ladies buildathon winners holding their prize"
-            className="w-full rounded-2xl object-cover aspect-[4/3]"
-          />
-        </div>
-      </section>
-
       {/* Founder */}
-      <section className="py-16 lg:py-24 px-6">
+      <section className="py-16 lg:py-24 px-6 bg-section-alt">
         <div className="container mx-auto max-w-4xl grid sm:grid-cols-[160px_1fr] gap-8 items-center">
           <img
             src={IMG_FOUNDER}
