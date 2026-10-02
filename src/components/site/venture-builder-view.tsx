@@ -67,6 +67,13 @@ const IDEAS = [
   "An AI assistant for small business owners",
 ];
 
+const KEY_DATES = [
+  { label: "Applications close", date: COHORT.dates.registrationCloses },
+  { label: "Onboarding", date: COHORT.dates.onboarding },
+  { label: "Classes start", date: COHORT.dates.classesStart },
+  { label: "Demo Day", date: COHORT.dates.demoDay },
+];
+
 const FAQS = [
   {
     q: "Do I need to know how to code?",
@@ -149,12 +156,12 @@ export function VentureBuilderView() {
     <div>
       {/* Hero */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 px-6">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-6xl grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="space-y-7 max-w-3xl"
+            className="space-y-7"
           >
             <p className="text-sm font-medium text-primary">
               Web3 × AI Venture Builder · {COHORT.name}, {COHORT.startMonth}
@@ -179,21 +186,43 @@ export function VentureBuilderView() {
                 See pricing <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-            <dl className="grid grid-cols-3 gap-6 border-t border-border pt-6 max-w-lg text-sm">
-              <div>
-                <dt className="text-muted-foreground">Length</dt>
-                <dd className="font-medium text-foreground mt-1">{COHORT.schedule.weeks} weeks</dd>
-              </div>
+          </motion.div>
+          <motion.aside
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="rounded-2xl border border-border bg-card p-7 sm:p-9 shadow-sm"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-4 gap-y-1">
+              <p className="font-display font-semibold text-lg text-foreground">
+                {COHORT.name} at a glance
+              </p>
+              <DaysLeft className="text-sm text-muted-foreground" />
+            </div>
+            <ol className="mt-6 border-l border-border ml-1.5 space-y-6">
+              {KEY_DATES.map((d) => (
+                <li key={d.label} className="relative pl-6">
+                  <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-primary bg-card" />
+                  <p className="text-sm text-muted-foreground">{d.label}</p>
+                  <p className="font-medium text-foreground">{d.date}</p>
+                </li>
+              ))}
+            </ol>
+            <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-border pt-6 text-sm">
               <div>
                 <dt className="text-muted-foreground">Live sessions</dt>
-                <dd className="font-medium text-foreground mt-1">Tue &amp; Fri, 5–7 PM WAT</dd>
+                <dd className="font-medium text-foreground mt-1">
+                  Tue &amp; Fri, 5–7 PM WAT on {COHORT.schedule.platform}
+                </dd>
               </div>
               <div>
-                <dt className="text-muted-foreground">Starts</dt>
-                <dd className="font-medium text-foreground mt-1">{COHORT.dates.classesStart}</dd>
+                <dt className="text-muted-foreground">Seats from</dt>
+                <dd className="font-display text-2xl font-bold text-foreground mt-0.5">
+                  {COHORT.pricing[0].price}
+                </dd>
               </div>
             </dl>
-          </motion.div>
+          </motion.aside>
         </div>
       </section>
 
@@ -312,8 +341,8 @@ export function VentureBuilderView() {
                 key={p.id}
                 className={`rounded-2xl border p-8 flex flex-col ${p.featured ? "border-foreground" : "border-border"}`}
               >
-                <div className="flex items-baseline justify-between gap-4">
-                  <p className="font-display font-semibold text-lg text-foreground">{p.name}</p>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <p className="font-display font-semibold text-lg text-foreground whitespace-nowrap">{p.name}</p>
                   <p className="text-sm text-muted-foreground">{p.note}</p>
                 </div>
                 <p className="text-5xl font-display font-bold text-foreground my-6">{p.price}</p>
