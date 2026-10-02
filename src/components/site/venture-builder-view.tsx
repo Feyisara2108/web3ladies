@@ -95,6 +95,17 @@ const PHASES = [
   },
 ];
 
+const IDEAS = [
+  "A savings app for market traders",
+  "An AI study buddy for students",
+  "A booking tool for local service businesses",
+  "A rewards app for community members",
+  "A marketplace for African creators",
+  "An AI assistant for small business owners",
+];
+
+const FOUNDER_IMAGE = "/assets/founder-oluchi-BnQV3JEa.png";
+
 const INCLUDED = [
   `${COHORT.schedule.weeks * 2} live build sessions with mentors`,
   "Recordings and resources on our learning platform",
@@ -140,8 +151,8 @@ const FAQS = [
     a: "No. Web3 is optional and only added where it genuinely improves your product — for example ownership, payments, identity or transparency.",
   },
   {
-    q: "When do I pay?",
-    a: "Right after you apply. Choose your seat option, submit your application, then complete payment to secure your place in the cohort.",
+    q: "When do I pay, and when is my seat confirmed?",
+    a: "Right after you apply. Choose your seat option, submit your application and complete payment — your seat is confirmed as soon as your payment is received.",
   },
 ];
 
@@ -168,7 +179,7 @@ function PaymentStep({ plan }: { plan: CohortPlan }) {
       <div className="space-y-2">
         <h3 className="text-2xl font-display font-bold text-foreground">Application received!</h3>
         <p className="text-muted-foreground">
-          One last step: complete your payment to secure your seat in {COHORT.name}.
+          One last step: complete your payment and your seat in {COHORT.name} is confirmed.
         </p>
       </div>
       <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 flex items-center justify-between text-left">
@@ -189,7 +200,7 @@ function PaymentStep({ plan }: { plan: CohortPlan }) {
         </a>
       ) : (
         <p className="text-sm text-muted-foreground">
-          We&apos;ll email you a secure payment link shortly to complete your enrolment.
+          We&apos;ll email you a secure payment link shortly. Your seat is confirmed once payment is received.
         </p>
       )}
     </div>
@@ -220,12 +231,8 @@ export function VentureBuilderView() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="inline-flex items-center gap-2 text-sm font-medium bg-white/10 border border-white/20 px-4 py-1.5 rounded-full"
+                className="inline-flex items-center text-sm font-medium bg-white/10 border border-white/20 px-4 py-1.5 rounded-full"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-coral opacity-75 animate-ping" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-coral" />
-                </span>
                 {COHORT.name} · Starts {COHORT.startMonth} · Applications open
               </motion.span>
               <motion.h1
@@ -234,11 +241,7 @@ export function VentureBuilderView() {
                 transition={{ duration: 0.6 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.05] tracking-tight"
               >
-                Go from idea to a{" "}
-                <span className="[box-decoration-break:clone] bg-[linear-gradient(transparent_72%,hsl(var(--coral)/0.6)_72%)]">
-                  working product
-                </span>{" "}
-                in 8 weeks.
+                Go from idea to a working product in 8 weeks.
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -446,6 +449,60 @@ export function VentureBuilderView() {
         </div>
       </section>
 
+      {/* Ideas */}
+      <section className="py-16 px-6">
+        <div className="container mx-auto max-w-4xl text-center">
+          <motion.div {...fadeUp} className="space-y-3 mb-8">
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground">
+              What could <span className="text-primary">you</span> build?
+            </h2>
+            <p className="text-muted-foreground">A few examples to spark your own idea.</p>
+          </motion.div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {IDEAS.map((idea, i) => (
+              <motion.span
+                key={idea}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-border bg-card text-sm text-foreground"
+              >
+                <Lightbulb className="w-4 h-4 text-primary" />
+                {idea}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Founder */}
+      <section className="py-20 lg:py-24 px-6 bg-section-alt">
+        <div className="container mx-auto max-w-4xl">
+          <div className="grid md:grid-cols-[220px_1fr] gap-10 items-center">
+            <motion.img
+              src={FOUNDER_IMAGE}
+              alt="Oluchi Enebeli, Founder of Web3Ladies"
+              className="rounded-3xl shadow-lg w-full max-w-[220px] mx-auto object-cover aspect-[3/4]"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            />
+            <motion.div {...fadeUp} className="space-y-5">
+              <Quote className="w-10 h-10 text-primary/30" />
+              <p className="text-2xl sm:text-3xl font-display font-semibold text-foreground leading-snug">
+                If the room did not naturally make space for more women, then I would help build a
+                bigger room.
+              </p>
+              <div>
+                <p className="font-display font-semibold text-foreground">Oluchi Enebeli</p>
+                <p className="text-sm text-muted-foreground">Founder, Web3Ladies</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section id="pricing" className="py-20 lg:py-28 px-6 scroll-mt-20">
         <div className="container mx-auto max-w-4xl">
@@ -595,7 +652,7 @@ export function VentureBuilderView() {
               <ArrowRight className="w-4 h-4" />
               <span className="font-medium text-foreground">2. Pay</span>
               <ArrowRight className="w-4 h-4" />
-              <span className="font-medium text-foreground">3. Onboarding</span>
+              <span className="font-medium text-foreground">3. You&apos;re in</span>
             </div>
           </motion.div>
           <motion.div
